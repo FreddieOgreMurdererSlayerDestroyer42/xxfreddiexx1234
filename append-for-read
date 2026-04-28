@@ -1,0 +1,28 @@
+try:
+    with open ("freddie.txt", "x") as file:
+        print("File created successfully.")
+        file.write("Freddie laban sa lahat")
+except FileExistsError:
+    print("File already exists.")
+
+while True:
+    print ("=== MINI LIBRARY SYSTEM ===")
+    print ("1. Add a book")
+    print ("2. Exit the program")
+    
+    choice = input("Enter your choice (1 or 2): ")
+    
+    if choice == "1":
+        title = input("Enter the book title: ")
+        author = input("Enter the book author: ")
+        
+        with open ("freddie.txt", "a") as file:
+            file.write(f"{title} by {author}\n")
+        
+        print("Book added successfully.")
+    
+    elif choice == "2":
+        print("Exiting the program. Goodbye!")
+        break 
+    else:       
+        print("Invalid choice. Please enter 1 or 2.")
