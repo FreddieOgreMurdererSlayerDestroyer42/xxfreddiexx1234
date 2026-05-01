@@ -9,7 +9,8 @@ except FileExistsError:
         print("\n=== MINI LIBRARY ===\n")
         print("1. Add a book")
         print("2. View All Books")
-        print("3. Exit the program...")
+        print("3. Update a Book")
+        print("4. Exit the program...")
 
         choice = input("\nEnter your choice: ")
 
@@ -35,10 +36,40 @@ except FileExistsError:
             except FileNotFoundError:
                 print("File not found.")
 
-        
-        elif choice == "3":
-            print("EXITING PROGRAM!!")
-            break
+        if choice == "3":
+            print("\n === UPDATE A BOOK === \n")
 
-        else:
-            print("INVALID INPUT! PLEASE TRY AGAIN!")
+            try:
+                with open("freddie.txt", "r") as file:
+                    books = file.readlines()
+
+                if not books:
+                    print("No Books to Update")
+                    continue
+
+                for i, book in enumerate(books):
+                    print(f"{i+1}, {book.strip()}")
+
+                num = int(input('Enter book number to update: '))
+
+                if 1 <= num <= len(books):
+                    new_title = input("Enter New Title: ")
+                    new_author = input("Enter New Author")
+
+                    books[num-1] = f"{new_title} by {new_author}\n"
+
+                    with open("freddie.txt", "w") as file:
+                        file.writelines(books)
+
+                    print("Book Updated Succesfully")
+                else:
+                    print("Invalid Number!")
+
+            except FileNotFoundError:
+                print("File not Found.")
+            except ValueError:
+                print("Invalid Input!")
+   
+        elif choice == "4":
+            print("EXITING PROGRAM!!!")
+            break
